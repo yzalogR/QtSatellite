@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/satellite.fbx</file>
+        <file>shaders/starFinder.fbx</file>
+        <file>shaders/starFinder.fbm/AM84_027_Radar_Diff.jpg</file>
+        <file>shaders/starFinder.fbm/AM84_027_Radar_Diff2.jpg</file>
+        <file>shaders/earth_4k.jpg</file>
+    </qresource>
+</RCC>
