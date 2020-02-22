@@ -78,28 +78,3 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-
-.idea/.gitignore
-.idea/Satellite.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-CMakeLists.txt
-CustomCameraController.cpp
-CustomCameraController.h
-EarthModel.cpp
-EarthModel.h
-Light.cpp
-Light.h
-MainWindow.cpp
-MainWindow.h
-SatelliteModel.cpp
-SatelliteModel.h
-SceneWidget.cpp
-SceneWidget.h
-StarFinderModel.cpp
-StarFinderModel.h
-cmake-build-debug/
-main.cpp
-resources.qrc
-shaders/
