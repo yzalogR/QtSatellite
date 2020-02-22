@@ -4,9 +4,9 @@
 
 #include "SatelliteModel.h"
 
-SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), radius(6.0f) {
+SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), radius(7.0f) {
     loader = new Qt3DRender::QSceneLoader(this);
-    loader->setSource(QUrl("qrc:/shaders/satellite.fbx"));
+    loader->setSource(QUrl("qrc:/shaders/satellite.obj"));
 
     transform = new Qt3DCore::QTransform(this);
     transform->setTranslation(QVector3D(0.0f, radius, 0.0f));

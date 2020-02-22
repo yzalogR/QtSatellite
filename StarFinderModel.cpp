@@ -4,9 +4,9 @@
 
 #include "StarFinderModel.h"
 
-StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), radius(5.8f) {
+StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), radius(6.0f) {
     loader = new Qt3DRender::QSceneLoader(this);
-    loader->setSource(QUrl("qrc:/shaders/starFinder.fbx"));
+    loader->setSource(QUrl("qrc:/shaders/starFinder.obj"));
 
     transform = new Qt3DCore::QTransform(this);
     transform->setTranslation(QVector3D(0.0f, radius, 0.0f));
