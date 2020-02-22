@@ -33,9 +33,9 @@ void SatelliteModel::updatePosition()
     float newLon , newLat;
     newLon = M_PI / 180.0f * (this->longitude - 90); // Φ
     newLat = M_PI / 180.0f * (90 - this->latitude); // θ
-    auto z = 6.0f * sin(newLat) * cos(newLon);
-    auto x = 6.0f * sin(newLat) * sin(newLon);
-    auto y = 6.0f * cos(newLat);
+    auto z = radius * sin(newLat) * cos(newLon);
+    auto x = radius * sin(newLat) * sin(newLon);
+    auto y = radius * cos(newLat);
     QVector3D currentPosition;
     currentPosition.setX(x);
     currentPosition.setY(y);
