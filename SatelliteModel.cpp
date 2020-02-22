@@ -4,7 +4,13 @@
 
 #include "SatelliteModel.h"
 
-SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), radius(7.0f) {
+SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent):
+                                Qt3DCore::QEntity(parent),
+                                radius(7.0f),
+                                longitude(0),
+                                latitude(90),
+                                angle(0)
+{
     loader = new Qt3DRender::QSceneLoader(this);
     loader->setSource(QUrl("qrc:/shaders/satellite.obj"));
 
@@ -13,10 +19,6 @@ SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(pa
 
     this->addComponent(loader);
     this->addComponent(transform);
-
-    longitude = 0;
-    latitude = 90;
-    angle = 0;
 }
 
 QPointF SatelliteModel::getCurrentPosition() {

@@ -18,6 +18,9 @@ public:
     explicit SceneWidget(QScreen *screen = nullptr);
     void setSatellitePosion(float longitude , float latitude);
     void setGroundPosion(float longitude , float latitude);
+    void moveSatellite(float longitude , float latitude);
+    void stopSatellite();
+    void runSatelliteMoveTimer();
 
 private:
     Qt3DCore::QEntity *createScene();
@@ -28,6 +31,9 @@ private:
     Light *light = nullptr;
 
     Qt3DCore::QEntity *rootEntity = nullptr;
+
+    QTimer* moveSatelliteTimer;
+    QPointF moveSatelliteOffset;
 };
 
 

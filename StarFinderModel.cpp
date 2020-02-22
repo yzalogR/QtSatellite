@@ -4,7 +4,13 @@
 
 #include "StarFinderModel.h"
 
-StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), radius(6.0f) {
+StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent):
+                                Qt3DCore::QEntity(parent),
+                                radius(6.0f),
+                                longitude(0),
+                                latitude(90),
+                                angle(0)
+{
     loader = new Qt3DRender::QSceneLoader(this);
     loader->setSource(QUrl("qrc:/shaders/starFinder.obj"));
 
@@ -13,10 +19,6 @@ StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(
 
     this->addComponent(loader);
     this->addComponent(transform);
-
-    longitude = 0;
-    latitude = 90;
-    angle = 0;
 }
 
 QPointF StarFinderModel::getCurrentPosition() {

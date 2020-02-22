@@ -26,6 +26,9 @@ SceneWidget::SceneWidget(QScreen *screen) : Qt3DExtras::Qt3DWindow(screen) {
     auto *forwardRenderer = new Qt3DExtras::QForwardRenderer(rootEntity);
     forwardRenderer->setCamera(m_camera);
     forwardRenderer->setClearColor(QColor("transparent"));
+
+    moveSatelliteTimer = new QTimer;
+    connect(moveSatelliteTimer,&QTimer::timeout,this,&SceneWidget::runSatelliteMoveTimer);
 }
 
 Qt3DCore::QEntity *SceneWidget::createScene() {
@@ -48,4 +51,54 @@ void SceneWidget::setGroundPosion(float longitude , float latitude)
 {
     this->starFinderModel->setCurrentPosition(longitude,latitude);
     this->starFinderModel->update();
+}
+
+void SceneWidget::moveSatellite(float longitude, float latitude)
+{
+    QPointF prePos = satelliteModel->getCurrentPosition();
+    this->moveSatelliteOffset.setX(prePos.x()-longitude);
+    this->moveSatelliteOffset.setY(prePos.y()-latitude);
+    this->moveSatelliteTimer->start(100);
+}
+
+void SceneWidget::stopSatellite()
+{
+    if (this->moveSatelliteTimer->isActive())
+    {
+        this->moveSatelliteOffset.setX(0);
+        this->moveSatelliteOffset.setY(0);
+        this->moveSatelliteTimer->stop();
+    }
+}
+
+void SceneWidget::runSatelliteMoveTimer()
+{
+    QPointF currentPosition = satelliteModel->getCurrentPosition();
+    float nextLon = currentPosition.x();
+    float nextLat = currentPosition.y();
+    if (this->moveSatelliteOffset.x() > 0)
+    {
+        nextLon--;
+        this->moveSatelliteOffset.rx()--;
+    }
+    else if (this->moveSatelliteOffset.x() < 0)
+    {
+        nextLon++;
+        this->moveSatelliteOffset.rx()++;
+    }
+    if (this->moveSatelliteOffset.y() > 0)
+    {
+        nextLat--;
+        this->moveSatelliteOffset.ry()--;
+    }
+    else if (this->moveSatelliteOffset.y() < 0)
+    {
+        nextLat++;
+        this->moveSatelliteOffset.ry()++;
+    }
+    satelliteModel->setCurrentPosition(nextLon, nextLat);
+    satelliteModel->update();
+    if (this->moveSatelliteOffset.x() == 0 && this->moveSatelliteOffset.y() == 0)
+        this->moveSatelliteTimer->stop();
+
 }

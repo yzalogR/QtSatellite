@@ -53,8 +53,23 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     vLayout->addWidget(groundSubmit);
     vLayout->addWidget(groundReset);
 
+
+    satelliteMoveText = new QLabel(QStringLiteral("Move satellite"));
+    satelliteMoveLon = new QLineEdit();
+    satelliteMoveLat = new QLineEdit();
+    satelliteMoveSubmit = new QPushButton(QStringLiteral("Submit"));
+    satelliteMoveStop = new QPushButton(QStringLiteral("Stop"));
+
+    vLayout->addWidget(satelliteMoveText);
+    vLayout->addWidget(satelliteMoveLon);
+    vLayout->addWidget(satelliteMoveLat);
+    vLayout->addWidget(satelliteMoveSubmit);
+    vLayout->addWidget(satelliteMoveStop);
+
     connect(satelliteSubmit,&QPushButton::clicked,this,&MainWindow::setSatellitePosion);
     connect(groundSubmit,&QPushButton::clicked,this,&MainWindow::setGroundPosion);
+    connect(satelliteMoveSubmit,&QPushButton::clicked,this,&MainWindow::moveSatellite);
+    connect(satelliteMoveStop,&QPushButton::clicked,this,&MainWindow::stopSatellite);
 }
 
 void MainWindow::setSatellitePosion()
@@ -69,4 +84,16 @@ void MainWindow::setGroundPosion()
     float longitude = groundLon->text().toFloat();
     float latitude = groundLat->text().toFloat();
     view->setGroundPosion(longitude,latitude);
+}
+
+void MainWindow::moveSatellite()
+{
+    float longitude = satelliteMoveLon->text().toFloat();
+    float latitude = satelliteMoveLat->text().toFloat();
+    view->moveSatellite(longitude,latitude);
+}
+
+void MainWindow::stopSatellite()
+{
+    view->stopSatellite();
 }

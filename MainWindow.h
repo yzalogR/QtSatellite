@@ -20,6 +20,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     void setSatellitePosion();
     void setGroundPosion();
+    void moveSatellite();
+    void stopSatellite();
 
 
 private:
@@ -36,6 +38,11 @@ private:
     QLineEdit *groundLat;
     QPushButton *groundSubmit;
     QPushButton *groundReset;
+    QLabel *satelliteMoveText;
+    QLineEdit *satelliteMoveLon;
+    QLineEdit *satelliteMoveLat;
+    QPushButton *satelliteMoveSubmit;
+    QPushButton *satelliteMoveStop;
 };
 
 #endif //SATELLITE_MAINWINDOW_H
