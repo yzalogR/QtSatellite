@@ -19,6 +19,7 @@ Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
     void setSatellitePosion();
+    void setGroundPosion();
 
 
 private:

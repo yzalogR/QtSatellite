@@ -43,3 +43,9 @@ void SceneWidget::setSatellitePosion(float longitude , float latitude)
     this->satelliteModel->setCurrentPosition(longitude,latitude);
     this->satelliteModel->update();
 }
+
+void SceneWidget::setGroundPosion(float longitude , float latitude)
+{
+    this->starFinderModel->setCurrentPosition(longitude,latitude);
+    this->starFinderModel->update();
+}
