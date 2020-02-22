@@ -13,4 +13,44 @@ SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(pa
 
     this->addComponent(loader);
     this->addComponent(transform);
+
+    longitude = 0;
+    latitude = 90;
+    angle = 0;
+}
+
+QPointF SatelliteModel::getCurrentPosition() {
+    return QPointF(longitude,latitude);
+}
+
+void SatelliteModel::setCurrentPosition(float newLon, float newLat) {
+    longitude = newLon;
+    latitude = newLat;
+}
+
+void SatelliteModel::updatePosition()
+{
+    float newLon , newLat;
+    newLon = M_PI / 180.0f * (this->longitude - 90); // Φ
+    newLat = M_PI / 180.0f * (90 - this->latitude); // θ
+    auto z = 6.0f * sin(newLat) * cos(newLon);
+    auto x = 6.0f * sin(newLat) * sin(newLon);
+    auto y = 6.0f * cos(newLat);
+    QVector3D currentPosition;
+    currentPosition.setX(x);
+    currentPosition.setY(y);
+    currentPosition.setZ(z);
+    this->transform->setTranslation(currentPosition);
+}
+
+void SatelliteModel::updateAngle()
+{
+    float newAngle = 90+180*(this->longitude/180);
+    this->transform->setRotationY(newAngle);
+}
+
+void SatelliteModel::update()
+{
+    this->updatePosition();
+    this->updateAngle();
 }

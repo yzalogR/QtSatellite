@@ -37,3 +37,9 @@ Qt3DCore::QEntity *SceneWidget::createScene() {
 
     return rootEntity;
 }
+
+void SceneWidget::setSatellitePosion(float longitude , float latitude)
+{
+    this->satelliteModel->setCurrentPosition(longitude,latitude);
+    this->satelliteModel->update();
+}

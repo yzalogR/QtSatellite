@@ -52,4 +52,13 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     vLayout->addWidget(groundLat);
     vLayout->addWidget(groundSubmit);
     vLayout->addWidget(groundReset);
+
+    connect(satelliteSubmit,&QPushButton::clicked,this,&MainWindow::setSatellitePosion);
+}
+
+void MainWindow::setSatellitePosion()
+{
+    float longitude = satelliteLon->text().toFloat();
+    float latitude = satelliteLat->text().toFloat();
+    view->setSatellitePosion(longitude,latitude);
 }

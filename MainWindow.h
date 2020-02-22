@@ -18,6 +18,8 @@ class MainWindow : public QWidget {
 Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
+    void setSatellitePosion();
+
 
 private:
     SceneWidget *view;

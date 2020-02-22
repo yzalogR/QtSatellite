@@ -16,6 +16,7 @@ class SceneWidget : public Qt3DExtras::Qt3DWindow {
 Q_OBJECT
 public:
     explicit SceneWidget(QScreen *screen = nullptr);
+    void setSatellitePosion(float longitude , float latitude);
 
 private:
     Qt3DCore::QEntity *createScene();
