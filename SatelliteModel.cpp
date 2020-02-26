@@ -4,13 +4,12 @@
 
 #include "SatelliteModel.h"
 
-SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent):
-                                Qt3DCore::QEntity(parent),
-                                radius(7.0f),
-                                longitude(0),
-                                latitude(90),
-                                angle(0)
-{
+SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent) :
+        Qt3DCore::QEntity(parent),
+        radius(7.0f),
+        longitude(0),
+        latitude(90),
+        angle(0) {
     loader = new Qt3DRender::QSceneLoader(this);
     loader->setSource(QUrl("qrc:/shaders/satellite.obj"));
 
@@ -22,7 +21,7 @@ SatelliteModel::SatelliteModel(Qt3DCore::QEntity *parent):
 }
 
 QPointF SatelliteModel::getCurrentPosition() {
-    return QPointF(longitude,latitude);
+    return QPointF(longitude, latitude);
 }
 
 void SatelliteModel::setCurrentPosition(float newLon, float newLat) {
@@ -30,9 +29,8 @@ void SatelliteModel::setCurrentPosition(float newLon, float newLat) {
     latitude = newLat;
 }
 
-void SatelliteModel::updatePosition()
-{
-    float newLon , newLat;
+void SatelliteModel::updatePosition() {
+    float newLon, newLat;
     newLon = M_PI / 180.0f * (this->longitude - 90); // Φ
     newLat = M_PI / 180.0f * (90 - this->latitude); // θ
     auto z = radius * sin(newLat) * cos(newLon);
@@ -45,14 +43,12 @@ void SatelliteModel::updatePosition()
     this->transform->setTranslation(currentPosition);
 }
 
-void SatelliteModel::updateAngle()
-{
-    float newAngle = 90+180*(this->longitude/180);
+void SatelliteModel::updateAngle() {
+    float newAngle = 90 + 180 * (this->longitude / 180);
     this->transform->setRotationY(newAngle);
 }
 
-void SatelliteModel::update()
-{
+void SatelliteModel::update() {
     this->updatePosition();
     this->updateAngle();
 }

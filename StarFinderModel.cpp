@@ -4,13 +4,12 @@
 
 #include "StarFinderModel.h"
 
-StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent):
-                                Qt3DCore::QEntity(parent),
-                                radius(6.0f),
-                                longitude(0),
-                                latitude(90),
-                                angle(0)
-{
+StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent) :
+        Qt3DCore::QEntity(parent),
+        radius(6.0f),
+        longitude(0),
+        latitude(90),
+        angle(0) {
     loader = new Qt3DRender::QSceneLoader(this);
     loader->setSource(QUrl("qrc:/shaders/starFinder.obj"));
 
@@ -22,17 +21,15 @@ StarFinderModel::StarFinderModel(Qt3DCore::QEntity *parent):
 }
 
 QPointF StarFinderModel::getCurrentPosition() {
-    return QPointF(longitude,latitude);
+    return QPointF(longitude, latitude);
 }
 
-void StarFinderModel::setCurrentPosition(float newLon, float newLat)
-{
+void StarFinderModel::setCurrentPosition(float newLon, float newLat) {
     this->longitude = newLon;
     this->latitude = newLat;
 }
 
-void StarFinderModel::updatePosition()
-{
+void StarFinderModel::updatePosition() {
     float newLon = 3.14f / 180.0f * (this->longitude - 90); // Φ
     float newLat = 3.14f / 180.0f * (90 - this->latitude); // θ
     auto z = radius * sin(newLat) * cos(newLon);
@@ -46,17 +43,15 @@ void StarFinderModel::updatePosition()
 }
 
 
-void StarFinderModel::updateAngle()
-{
-    float newAngleX = 90+180*(-this->latitude/180);
-    float newAngleY = -90+180*this->longitude/180;
+void StarFinderModel::updateAngle() {
+    float newAngleX = 90 + 180 * (-this->latitude / 180);
+    float newAngleY = -90 + 180 * this->longitude / 180;
     this->transform->setRotationX(newAngleX);
     this->transform->setRotationY(newAngleY);
 }
 
 
-void StarFinderModel::update()
-{
+void StarFinderModel::update() {
     this->updateAngle();
     this->updatePosition();
 }

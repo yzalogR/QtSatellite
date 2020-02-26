@@ -9,7 +9,7 @@
 #include <Qt3DRender>
 
 class Light : public Qt3DCore::QEntity {
-    Q_OBJECT
+Q_OBJECT
 public:
     explicit Light(Qt3DRender::QCamera *camera, Qt3DCore::QEntity *parent = nullptr);
 
