@@ -27,6 +27,7 @@ QPointF SatelliteModel::getCurrentPosition() {
 void SatelliteModel::setCurrentPosition(float newLon, float newLat) {
     longitude = newLon;
     latitude = newLat;
+    emit emitLonLat(newLon,newLat);
 }
 
 void SatelliteModel::updatePosition() {

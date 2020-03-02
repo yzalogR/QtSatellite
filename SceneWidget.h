@@ -10,6 +10,7 @@
 #include "StarFinderModel.h"
 #include "EarthModel.h"
 #include "TorusModel.h"
+#include "ConeModel.h"
 #include "Light.h"
 
 
@@ -36,6 +37,7 @@ private:
     StarFinderModel *starFinderModel = nullptr;
     EarthModel *earthModel = nullptr;
     TorusModel* torusModel = nullptr;
+    ConeSignalModel* coneSignalModel = nullptr;
     Light *light = nullptr;
 
     Qt3DCore::QEntity *rootEntity = nullptr;

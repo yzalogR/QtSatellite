@@ -35,6 +35,9 @@ private:
     Qt3DCore::QTransform *transform = nullptr;
     float radius;
     float longitude, latitude, angle;
+
+signals:
+    void emitLonLat(float newLon,float newLat);
 };
 
 

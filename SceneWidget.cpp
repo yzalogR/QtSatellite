@@ -38,6 +38,7 @@ Qt3DCore::QEntity *SceneWidget::createScene() {
     satelliteModel = new SatelliteModel(rootEntity);
     starFinderModel = new StarFinderModel(rootEntity);
     torusModel = new TorusModel(rootEntity);
+    coneSignalModel = new ConeSignalModel(rootEntity,satelliteModel);
 
     return rootEntity;
 }
@@ -69,6 +70,7 @@ void SceneWidget::stopSatellite() {
 
 void SceneWidget::runSatelliteMoveTimer() {
     QPointF currentPosition = satelliteModel->getCurrentPosition();
+    QPointF groundPosition = starFinderModel->getCurrentPosition();
     float nextLon = currentPosition.x();
     float nextLat = currentPosition.y();
     if (this->moveSatelliteOffset.x() > 0) {
@@ -87,6 +89,17 @@ void SceneWidget::runSatelliteMoveTimer() {
     }
     satelliteModel->setCurrentPosition(nextLon, nextLat);
     satelliteModel->update();
+
+    //if satellite scaned ground
+    float diffLon = abs(currentPosition.x()-groundPosition.x());
+    float diffLat = abs(currentPosition.y()-groundPosition.y());
+    if (diffLat >= 90)
+        diffLat -= 90;
+    if (diffLon < 20 && diffLat < 20)
+        this->coneSignalModel->updateColor(true);
+    else
+        this->coneSignalModel->updateColor(false);
+
     if (this->moveSatelliteOffset.x() == 0 && this->moveSatelliteOffset.y() == 0)
         this->moveSatelliteTimer->stop();
 

@@ -20,6 +20,7 @@ add_executable(Satellite
         EarthModel.cpp
         CustomCameraController.cpp
         TorusModel.cpp
+        ConeModel.cpp
         resources.qrc
         Light.cpp Light.h)
 
