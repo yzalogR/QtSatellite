@@ -22,6 +22,7 @@ public:
     void moveSatellite(float longitude , float latitude);
     void stopSatellite();
     void runSatelliteMoveTimer();
+    void updateTorusAngle(float angleX,float angleY);
 
 private:
     Qt3DCore::QEntity *createScene();

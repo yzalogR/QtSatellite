@@ -22,6 +22,7 @@ public:
     void setGroundPosion();
     void moveSatellite();
     void stopSatellite();
+    void updateTorusAngle();
 
 
 private:
@@ -43,6 +44,10 @@ private:
     QLineEdit *satelliteMoveLat;
     QPushButton *satelliteMoveSubmit;
     QPushButton *satelliteMoveStop;
+    QLabel *torusText;
+    QLineEdit *torusAngleX;
+    QLineEdit *torusAngleY;
+    QPushButton *torusChangeSubmit;
 };
 
 #endif //SATELLITE_MAINWINDOW_H

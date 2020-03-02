@@ -103,3 +103,10 @@ void SceneWidget::runSatelliteMoveTimer()
         this->moveSatelliteTimer->stop();
 
 }
+
+void SceneWidget::updateTorusAngle(float angleX,float angleY)
+{
+    torusModel->setAngleX(angleX);
+    torusModel->setAngleY(angleY);
+    torusModel->updateAngle();
+}

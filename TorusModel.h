@@ -15,15 +15,18 @@ public:
     explicit TorusModel(Qt3DCore::QEntity *parent);
 
     //Get starfinder longitude and latitude;
-    QPointF getCurrentPosition();
+    //QPointF getCurrentPosition();
     //Set starfinder newest position
-    void setCurrentPosition(float newLon, float newLat);
+    //void setCurrentPosition(float newLon, float newLat);
+    //Set torusModel angle
+    void setAngleX(float angleX);
+    void setAngleY(float angleY);
     //Refresh starfinder in map location
-    void updatePosition();
+    //void updatePosition();
     //Refresh starfinder angle
     void updateAngle();
     //Refresh angle and map location
-    void update();
+    //void update();
 
 private:
     // Material
@@ -32,7 +35,7 @@ private:
     Qt3DExtras::QTorusMesh *torusMesh;
     Qt3DCore::QTransform *transform = nullptr;
     float radius;
-    float angle;
+    float angleX , angleY;
 };
 
 
