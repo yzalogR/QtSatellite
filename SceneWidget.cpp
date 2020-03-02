@@ -37,6 +37,7 @@ Qt3DCore::QEntity *SceneWidget::createScene() {
     earthModel = new EarthModel(rootEntity);
     satelliteModel = new SatelliteModel(rootEntity);
     starFinderModel = new StarFinderModel(rootEntity);
+    torusModel = new TorusModel(rootEntity);
 
     return rootEntity;
 }

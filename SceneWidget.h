@@ -9,6 +9,7 @@
 #include "SatelliteModel.h"
 #include "StarFinderModel.h"
 #include "EarthModel.h"
+#include "TorusModel.h"
 #include "Light.h"
 
 
@@ -28,6 +29,7 @@ private:
     SatelliteModel *satelliteModel = nullptr;
     StarFinderModel *starFinderModel = nullptr;
     EarthModel *earthModel = nullptr;
+    TorusModel* torusModel = nullptr;
     Light *light = nullptr;
 
     Qt3DCore::QEntity *rootEntity = nullptr;

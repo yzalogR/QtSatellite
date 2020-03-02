@@ -19,6 +19,7 @@ add_executable(Satellite
         StarFinderModel.cpp
         EarthModel.cpp
         CustomCameraController.cpp
+        TorusModel.cpp
         resources.qrc
         Light.cpp Light.h)
 
