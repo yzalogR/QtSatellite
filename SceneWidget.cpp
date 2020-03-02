@@ -13,7 +13,7 @@ SceneWidget::SceneWidget(QScreen *screen) : Qt3DExtras::Qt3DWindow(screen) {
     auto *m_camera = this->camera();
     m_camera->lens()->setPerspectiveProjection(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
     m_camera->setPosition(QVector3D(0.0f, 0.0f, 20.0f));
-    m_camera->setUpVector(QVector3D(0.0f, 0.0f, 0.0f));
+    m_camera->setUpVector(QVector3D(0.0f, 0.1f, 0.0f));
     m_camera->setViewCenter(QVector3D(0.0f, 0.0f, 0.0f));
 
     auto *manipulator = new CustomCameraController(rootEntity);
