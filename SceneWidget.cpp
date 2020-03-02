@@ -28,7 +28,7 @@ SceneWidget::SceneWidget(QScreen *screen) : Qt3DExtras::Qt3DWindow(screen) {
     forwardRenderer->setClearColor(QColor("transparent"));
 
     moveSatelliteTimer = new QTimer;
-    connect(moveSatelliteTimer,&QTimer::timeout,this,&SceneWidget::runSatelliteMoveTimer);
+    connect(moveSatelliteTimer, &QTimer::timeout, this, &SceneWidget::runSatelliteMoveTimer);
 }
 
 Qt3DCore::QEntity *SceneWidget::createScene() {
@@ -42,58 +42,46 @@ Qt3DCore::QEntity *SceneWidget::createScene() {
     return rootEntity;
 }
 
-void SceneWidget::setSatellitePosion(float longitude , float latitude)
-{
-    this->satelliteModel->setCurrentPosition(longitude,latitude);
+void SceneWidget::setSatellitePosion(float longitude, float latitude) {
+    this->satelliteModel->setCurrentPosition(longitude, latitude);
     this->satelliteModel->update();
 }
 
-void SceneWidget::setGroundPosion(float longitude , float latitude)
-{
-    this->starFinderModel->setCurrentPosition(longitude,latitude);
+void SceneWidget::setGroundPosion(float longitude, float latitude) {
+    this->starFinderModel->setCurrentPosition(longitude, latitude);
     this->starFinderModel->update();
 }
 
-void SceneWidget::moveSatellite(float longitude, float latitude)
-{
+void SceneWidget::moveSatellite(float longitude, float latitude) {
     QPointF prePos = satelliteModel->getCurrentPosition();
-    this->moveSatelliteOffset.setX(prePos.x()-longitude);
-    this->moveSatelliteOffset.setY(prePos.y()-latitude);
+    this->moveSatelliteOffset.setX(prePos.x() - longitude);
+    this->moveSatelliteOffset.setY(prePos.y() - latitude);
     this->moveSatelliteTimer->start(100);
 }
 
-void SceneWidget::stopSatellite()
-{
-    if (this->moveSatelliteTimer->isActive())
-    {
+void SceneWidget::stopSatellite() {
+    if (this->moveSatelliteTimer->isActive()) {
         this->moveSatelliteOffset.setX(0);
         this->moveSatelliteOffset.setY(0);
         this->moveSatelliteTimer->stop();
     }
 }
 
-void SceneWidget::runSatelliteMoveTimer()
-{
+void SceneWidget::runSatelliteMoveTimer() {
     QPointF currentPosition = satelliteModel->getCurrentPosition();
     float nextLon = currentPosition.x();
     float nextLat = currentPosition.y();
-    if (this->moveSatelliteOffset.x() > 0)
-    {
+    if (this->moveSatelliteOffset.x() > 0) {
         nextLon--;
         this->moveSatelliteOffset.rx()--;
-    }
-    else if (this->moveSatelliteOffset.x() < 0)
-    {
+    } else if (this->moveSatelliteOffset.x() < 0) {
         nextLon++;
         this->moveSatelliteOffset.rx()++;
     }
-    if (this->moveSatelliteOffset.y() > 0)
-    {
+    if (this->moveSatelliteOffset.y() > 0) {
         nextLat--;
         this->moveSatelliteOffset.ry()--;
-    }
-    else if (this->moveSatelliteOffset.y() < 0)
-    {
+    } else if (this->moveSatelliteOffset.y() < 0) {
         nextLat++;
         this->moveSatelliteOffset.ry()++;
     }

@@ -95,29 +95,25 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     connect(torusChangeSubmit,&QPushButton::clicked,this,&MainWindow::updateTorusAngle);
 }
 
-void MainWindow::setSatellitePosion()
-{
+void MainWindow::setSatellitePosion() {
     float longitude = satelliteLon->text().toFloat();
     float latitude = satelliteLat->text().toFloat();
-    view->setSatellitePosion(longitude,latitude);
+    view->setSatellitePosion(longitude, latitude);
 }
 
-void MainWindow::setGroundPosion()
-{
+void MainWindow::setGroundPosion() {
     float longitude = groundLon->text().toFloat();
     float latitude = groundLat->text().toFloat();
-    view->setGroundPosion(longitude,latitude);
+    view->setGroundPosion(longitude, latitude);
 }
 
-void MainWindow::moveSatellite()
-{
+void MainWindow::moveSatellite() {
     float longitude = satelliteMoveLon->text().toFloat();
     float latitude = satelliteMoveLat->text().toFloat();
-    view->moveSatellite(longitude,latitude);
+    view->moveSatellite(longitude, latitude);
 }
 
-void MainWindow::stopSatellite()
-{
+void MainWindow::stopSatellite() {
     view->stopSatellite();
 }
 

@@ -11,18 +11,22 @@
 
 
 class SatelliteModel : public Qt3DCore::QEntity {
-    Q_OBJECT
+Q_OBJECT
 public:
     explicit SatelliteModel(Qt3DCore::QEntity *parent);
 
     //Get satellite currently longitute and latitude
     QPointF getCurrentPosition();
+
     //Set satellite newest position
     void setCurrentPosition(float newLon, float newLat);
+
     //Refresh satellite in map location
     void updatePosition();
+
     //Refresh satellite angle
     void updateAngle();
+
     //Refresh angle and map location
     void update();
 
@@ -30,7 +34,7 @@ private:
     Qt3DRender::QSceneLoader *loader = nullptr;
     Qt3DCore::QTransform *transform = nullptr;
     float radius;
-    float longitude , latitude , angle;
+    float longitude, latitude, angle;
 };
 
 

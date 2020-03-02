@@ -17,10 +17,15 @@ class SceneWidget : public Qt3DExtras::Qt3DWindow {
 Q_OBJECT
 public:
     explicit SceneWidget(QScreen *screen = nullptr);
-    void setSatellitePosion(float longitude , float latitude);
-    void setGroundPosion(float longitude , float latitude);
-    void moveSatellite(float longitude , float latitude);
+
+    void setSatellitePosion(float longitude, float latitude);
+
+    void setGroundPosion(float longitude, float latitude);
+
+    void moveSatellite(float longitude, float latitude);
+
     void stopSatellite();
+
     void runSatelliteMoveTimer();
     void updateTorusAngle(float angleX,float angleY);
 
@@ -35,7 +40,7 @@ private:
 
     Qt3DCore::QEntity *rootEntity = nullptr;
 
-    QTimer* moveSatelliteTimer;
+    QTimer *moveSatelliteTimer;
     QPointF moveSatelliteOffset;
 };
 

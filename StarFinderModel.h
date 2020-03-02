@@ -16,12 +16,16 @@ public:
 
     //Get starfinder longitude and latitude;
     QPointF getCurrentPosition();
+
     //Set starfinder newest position
     void setCurrentPosition(float newLon, float newLat);
+
     //Refresh starfinder in map location
     void updatePosition();
+
     //Refresh starfinder angle
     void updateAngle();
+
     //Refresh angle and map location
     void update();
 

@@ -18,9 +18,13 @@ class MainWindow : public QWidget {
 Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
+
     void setSatellitePosion();
+
     void setGroundPosion();
+
     void moveSatellite();
+
     void stopSatellite();
     void updateTorusAngle();
 

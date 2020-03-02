@@ -12,10 +12,28 @@
 
 
 class CustomCameraController : public Qt3DExtras::QAbstractCameraController {
-    Q_OBJECT
-    Q_PROPERTY(QSize windowSize READ windowSize WRITE setWindowSize NOTIFY windowSizeChanged)
-    Q_PROPERTY(float trackballSize READ trackballSize WRITE setTrackballSize NOTIFY trackballSizeChanged)
-    Q_PROPERTY(float rotationSpeed READ rotationSpeed WRITE setRotationSpeed NOTIFY rotationSpeedChanged)
+Q_OBJECT
+    Q_PROPERTY(QSize windowSize
+                       READ
+                       windowSize
+                       WRITE
+                       setWindowSize
+                       NOTIFY
+                       windowSizeChanged)
+    Q_PROPERTY(float trackballSize
+                       READ
+                       trackballSize
+                       WRITE
+                       setTrackballSize
+                       NOTIFY
+                       trackballSizeChanged)
+    Q_PROPERTY(float rotationSpeed
+                       READ
+                       rotationSpeed
+                       WRITE
+                       setRotationSpeed
+                       NOTIFY
+                       rotationSpeedChanged)
 public:
     explicit CustomCameraController(Qt3DCore::QNode *parent = nullptr);
 
@@ -26,6 +44,7 @@ public:
     float rotationSpeed() const { return m_rotationSpeed; }
 
 public slots:
+
     void setWindowSize(QSize windowSize) {
         if (m_windowSize != windowSize) {
             m_windowSize = windowSize;
@@ -48,8 +67,11 @@ public slots:
     }
 
 signals:
+
     void windowSizeChanged(QSize windowSize);
+
     void trackballSizeChanged(float trackballSize);
+
     void rotationSpeedChanged(float rotationSpeed);
 
 private:
