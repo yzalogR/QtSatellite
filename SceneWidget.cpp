@@ -70,7 +70,7 @@ void SceneWidget::stopSatellite() {
 
 void SceneWidget::runSatelliteMoveTimer() {
     QPointF currentPosition = satelliteModel->getCurrentPosition();
-    QPointF groundPosition = starFinderModel->getCurrentPosition();
+    //QPointF groundPosition = starFinderModel->getCurrentPosition();
     float nextLon = currentPosition.x();
     float nextLat = currentPosition.y();
     if (this->moveSatelliteOffset.x() > 0) {
@@ -91,11 +91,10 @@ void SceneWidget::runSatelliteMoveTimer() {
     satelliteModel->update();
 
     //if satellite scaned ground
-    float diffLon = abs(currentPosition.x()-groundPosition.x());
-    float diffLat = abs(currentPosition.y()-groundPosition.y());
-    if (diffLat >= 90)
-        diffLat -= 90;
-    if (diffLon < 20 && diffLat < 20)
+    QVector3D satellite3DPosition = satelliteModel->getVector3DPosition();
+    QVector3D starFinder3DPosition = starFinderModel->getVector3DPosition();
+    float distanceDiff = satellite3DPosition.distanceToPoint(starFinder3DPosition);
+    if (distanceDiff < 2.15)
         this->coneSignalModel->updateColor(true);
     else
         this->coneSignalModel->updateColor(false);

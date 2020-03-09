@@ -16,6 +16,7 @@ public:
 
     //Get starfinder longitude and latitude;
     QPointF getCurrentPosition();
+    QVector3D getVector3DPosition();
 
     //Set starfinder newest position
     void setCurrentPosition(float newLon, float newLat);

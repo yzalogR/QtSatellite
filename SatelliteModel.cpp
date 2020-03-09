@@ -53,3 +53,8 @@ void SatelliteModel::update() {
     this->updatePosition();
     this->updateAngle();
 }
+
+QVector3D SatelliteModel::getVector3DPosition()
+{
+    return transform->translation();
+}

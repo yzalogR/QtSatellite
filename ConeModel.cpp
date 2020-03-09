@@ -9,14 +9,14 @@ ConeSignalModel::ConeSignalModel(Qt3DCore::QEntity *parent,SatelliteModel* satel
 {
     material = new Qt3DExtras::QPhongAlphaMaterial(parent);
     material->setProperty("ambient",QVariant(QColor(144,238,144)));
-    material->setProperty("alpha",QVariant(float(0.3)));
+    material->setProperty("alpha",QVariant(float(0.5)));
     signalEntity = new Qt3DCore::QEntity(parent);
     signalMesh = new Qt3DExtras::QConeMesh;
     signalMesh->setTopRadius(0.01);
     signalMesh->setBottomRadius(2);
     signalMesh->setLength(2);
     signalMesh->setRings(5);
-    signalMesh->setSlices(20);
+    signalMesh->setSlices(100);
 
     transform = new Qt3DCore::QTransform(this);
     transform->setTranslation(QVector3D(0.0f, radius, 0.0));
