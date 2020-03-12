@@ -9,6 +9,8 @@
 #include "SatelliteModel.h"
 #include "StarFinderModel.h"
 #include "EarthModel.h"
+#include "TorusModel.h"
+#include "ConeModel.h"
 #include "Light.h"
 
 
@@ -26,6 +28,7 @@ public:
     void stopSatellite();
 
     void runSatelliteMoveTimer();
+    void updateTorusAngle(float angleX,float angleY);
 
 private:
     Qt3DCore::QEntity *createScene();
@@ -33,6 +36,8 @@ private:
     SatelliteModel *satelliteModel = nullptr;
     StarFinderModel *starFinderModel = nullptr;
     EarthModel *earthModel = nullptr;
+    TorusModel* torusModel = nullptr;
+    ConeSignalModel* coneSignalModel = nullptr;
     Light *light = nullptr;
 
     Qt3DCore::QEntity *rootEntity = nullptr;

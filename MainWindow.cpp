@@ -23,8 +23,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     auto *validator = new QDoubleValidator(-180, 180, 2);
     satelliteLon = new QLineEdit();
     satelliteLon->setValidator(validator);
+    satelliteLon->setPlaceholderText("Longitude");
     satelliteLat = new QLineEdit();
     satelliteLat->setValidator(validator);
+    satelliteLat->setPlaceholderText("Latitude");
     satelliteSubmit = new QPushButton();
     satelliteSubmit->setText(QStringLiteral("Submit"));
     satelliteReset = new QPushButton();
@@ -40,8 +42,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     groundAngleText->setText(QStringLiteral("Ground"));
     groundLon = new QLineEdit();
     groundLon->setValidator(validator);
+    groundLon->setPlaceholderText("Longitude");
     groundLat = new QLineEdit();
     groundLat->setValidator(validator);
+    groundLat->setPlaceholderText("Latitude");
     groundSubmit = new QPushButton();
     groundSubmit->setText(QStringLiteral("Submit"));
     groundReset = new QPushButton();
@@ -56,7 +60,11 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
     satelliteMoveText = new QLabel(QStringLiteral("Move satellite"));
     satelliteMoveLon = new QLineEdit();
+    satelliteMoveLon->setValidator(validator);
+    satelliteMoveLon->setPlaceholderText("Move to longitude");
     satelliteMoveLat = new QLineEdit();
+    satelliteMoveLat->setValidator(validator);
+    satelliteMoveLat->setPlaceholderText("Move to latitude");
     satelliteMoveSubmit = new QPushButton(QStringLiteral("Submit"));
     satelliteMoveStop = new QPushButton(QStringLiteral("Stop"));
 
@@ -66,10 +74,25 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     vLayout->addWidget(satelliteMoveSubmit);
     vLayout->addWidget(satelliteMoveStop);
 
-    connect(satelliteSubmit, &QPushButton::clicked, this, &MainWindow::setSatellitePosion);
-    connect(groundSubmit, &QPushButton::clicked, this, &MainWindow::setGroundPosion);
-    connect(satelliteMoveSubmit, &QPushButton::clicked, this, &MainWindow::moveSatellite);
-    connect(satelliteMoveStop, &QPushButton::clicked, this, &MainWindow::stopSatellite);
+    torusText = new QLabel(QStringLiteral("Change torus"));
+    torusAngleX = new QLineEdit();
+    torusAngleX->setPlaceholderText("X rotation");
+    torusAngleX->setValidator(validator);
+    torusAngleY = new QLineEdit();
+    torusAngleY->setValidator(validator);
+    torusAngleY->setPlaceholderText("Y rotation");
+    torusChangeSubmit = new QPushButton(QStringLiteral("Submit"));
+
+    vLayout->addWidget(torusText);
+    vLayout->addWidget(torusAngleX);
+    vLayout->addWidget(torusAngleY);
+    vLayout->addWidget(torusChangeSubmit);
+
+    connect(satelliteSubmit,&QPushButton::clicked,this,&MainWindow::setSatellitePosion);
+    connect(groundSubmit,&QPushButton::clicked,this,&MainWindow::setGroundPosion);
+    connect(satelliteMoveSubmit,&QPushButton::clicked,this,&MainWindow::moveSatellite);
+    connect(satelliteMoveStop,&QPushButton::clicked,this,&MainWindow::stopSatellite);
+    connect(torusChangeSubmit,&QPushButton::clicked,this,&MainWindow::updateTorusAngle);
 }
 
 void MainWindow::setSatellitePosion() {
@@ -92,4 +115,11 @@ void MainWindow::moveSatellite() {
 
 void MainWindow::stopSatellite() {
     view->stopSatellite();
+}
+
+void MainWindow::updateTorusAngle()
+{
+    float angleX = torusAngleX->text().toFloat();
+    float angleY = torusAngleY->text().toFloat();
+    view->updateTorusAngle(angleX,angleY);
 }

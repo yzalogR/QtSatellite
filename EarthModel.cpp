@@ -9,6 +9,7 @@ EarthModel::EarthModel(Qt3DCore::QEntity *parent) : Qt3DCore::QEntity(parent), r
     loader->setSource(QUrl("qrc:/shaders/earth_4k.jpg"));
     material->setTexture(loader);
     transform->setScale(radius);
+    mesh->setSlices(100);
 
     this->addComponent(mesh);
     this->addComponent(material);

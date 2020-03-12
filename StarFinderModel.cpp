@@ -55,3 +55,8 @@ void StarFinderModel::update() {
     this->updateAngle();
     this->updatePosition();
 }
+
+QVector3D StarFinderModel::getVector3DPosition()
+{
+    return transform->translation();
+}

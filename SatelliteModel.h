@@ -17,6 +17,7 @@ public:
 
     //Get satellite currently longitute and latitude
     QPointF getCurrentPosition();
+    QVector3D getVector3DPosition();
 
     //Set satellite newest position
     void setCurrentPosition(float newLon, float newLat);
@@ -35,6 +36,9 @@ private:
     Qt3DCore::QTransform *transform = nullptr;
     float radius;
     float longitude, latitude, angle;
+
+signals:
+    void emitLonLat(float newLon,float newLat);
 };
 
 

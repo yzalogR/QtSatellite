@@ -13,7 +13,7 @@ SceneWidget::SceneWidget(QScreen *screen) : Qt3DExtras::Qt3DWindow(screen) {
     auto *m_camera = this->camera();
     m_camera->lens()->setPerspectiveProjection(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
     m_camera->setPosition(QVector3D(0.0f, 0.0f, 20.0f));
-    m_camera->setUpVector(QVector3D(0.0f, 0.0f, 0.0f));
+    m_camera->setUpVector(QVector3D(0.0f, 0.1f, 0.0f));
     m_camera->setViewCenter(QVector3D(0.0f, 0.0f, 0.0f));
 
     auto *manipulator = new CustomCameraController(rootEntity);
@@ -37,6 +37,8 @@ Qt3DCore::QEntity *SceneWidget::createScene() {
     earthModel = new EarthModel(rootEntity);
     satelliteModel = new SatelliteModel(rootEntity);
     starFinderModel = new StarFinderModel(rootEntity);
+    torusModel = new TorusModel(rootEntity);
+    coneSignalModel = new ConeSignalModel(rootEntity,satelliteModel);
 
     return rootEntity;
 }
@@ -68,6 +70,7 @@ void SceneWidget::stopSatellite() {
 
 void SceneWidget::runSatelliteMoveTimer() {
     QPointF currentPosition = satelliteModel->getCurrentPosition();
+    //QPointF groundPosition = starFinderModel->getCurrentPosition();
     float nextLon = currentPosition.x();
     float nextLat = currentPosition.y();
     if (this->moveSatelliteOffset.x() > 0) {
@@ -86,7 +89,24 @@ void SceneWidget::runSatelliteMoveTimer() {
     }
     satelliteModel->setCurrentPosition(nextLon, nextLat);
     satelliteModel->update();
+
+    //if satellite scaned ground
+    QVector3D satellite3DPosition = satelliteModel->getVector3DPosition();
+    QVector3D starFinder3DPosition = starFinderModel->getVector3DPosition();
+    float distanceDiff = satellite3DPosition.distanceToPoint(starFinder3DPosition);
+    if (distanceDiff < 2.15)
+        this->coneSignalModel->updateColor(true);
+    else
+        this->coneSignalModel->updateColor(false);
+
     if (this->moveSatelliteOffset.x() == 0 && this->moveSatelliteOffset.y() == 0)
         this->moveSatelliteTimer->stop();
 
+}
+
+void SceneWidget::updateTorusAngle(float angleX,float angleY)
+{
+    torusModel->setAngleX(angleX);
+    torusModel->setAngleY(angleY);
+    torusModel->updateAngle();
 }

@@ -1,4 +1,4 @@
-#include <Qt3DRender/QCamera>
+﻿#include <Qt3DRender/QCamera>
 #include <QVector2D>
 #include <Qt3DInput/QAction>
 #include <Qt3DInput/QActionInput>
@@ -86,6 +86,11 @@ void CustomCameraController::moveCamera(const InputState &state, float dt) {
                                        state.tyAxisValue * ls,
                                        state.tzAxisValue * ls) * dt,
                              Qt3DRender::QCamera::DontTranslateViewCenter);
+    }
+    if (state.rightMouseButtonActive) {
+        theCamera->translate(QVector3D(state.rxAxisValue * linearSpeed(),
+                                          state.ryAxisValue * linearSpeed(),
+                                          state.tzAxisValue * linearSpeed()) * dt);
     }
     m_mouseLastPosition = m_mouseCurrentPosition;
 }

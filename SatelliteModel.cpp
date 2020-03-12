@@ -27,6 +27,7 @@ QPointF SatelliteModel::getCurrentPosition() {
 void SatelliteModel::setCurrentPosition(float newLon, float newLat) {
     longitude = newLon;
     latitude = newLat;
+    emit emitLonLat(newLon,newLat);
 }
 
 void SatelliteModel::updatePosition() {
@@ -51,4 +52,9 @@ void SatelliteModel::updateAngle() {
 void SatelliteModel::update() {
     this->updatePosition();
     this->updateAngle();
+}
+
+QVector3D SatelliteModel::getVector3DPosition()
+{
+    return transform->translation();
 }
